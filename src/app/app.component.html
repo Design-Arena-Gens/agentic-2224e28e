@@ -1,0 +1,61 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<main class="container">
+  <section class="app-card">
+    <h1 class="app-title">{{ title }}</h1>
+
+    <div class="add-row">
+      <input
+        aria-label="New todo"
+        type="text"
+        placeholder="What needs to be done?"
+        [(ngModel)]="newTodoText"
+        (keyup.enter)="addTodo()"
+      />
+      <button class="primary" (click)="addTodo()">Add</button>
+    </div>
+
+    <div class="toolbar">
+      <div class="filters">
+        <button [class.active]="filter==='all'" (click)="setFilter('all')">All</button>
+        <button [class.active]="filter==='active'" (click)="setFilter('active')">Active</button>
+        <button [class.active]="filter==='completed'" (click)="setFilter('completed')">Completed</button>
+      </div>
+      <button class="danger" (click)="clearCompleted()">Clear Completed</button>
+    </div>
+
+    <ul class="todo-list" *ngIf="filteredTodos.length; else emptyState">
+      @for (todo of filteredTodos; track todo.id) {
+        <li class="todo-item" [class.completed]="todo.completed">
+          <label class="checkbox">
+            <input type="checkbox" [checked]="todo.completed" (change)="toggleTodo(todo.id)" />
+            <span></span>
+          </label>
+          <span class="text">{{ todo.text }}</span>
+          <button class="icon danger" aria-label="Delete" (click)="removeTodo(todo.id)">?</button>
+        </li>
+      }
+    </ul>
+
+    <ng-template #emptyState>
+      <p class="empty">No todos yet. Add one above.</p>
+    </ng-template>
+  </section>
+</main>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
